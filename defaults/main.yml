@@ -1,9 +1,9 @@
 ---
 # defaults file for ansible-role-research_workstation
 
+# FSL
+
 ## required
-#
-# 
 
 fsl_state             : 'present'   # absent
 
@@ -19,4 +19,54 @@ fsl_state             : 'present'   # absent
 #   - 'deb http://neuro.debian.net/debian data main contrib non-free'
 #   - '#deb-src http://neuro.debian.net/debian data main contrib non-free'
 
+# Display
+
+## directories
+
+display_github_url           : 'https://github.com/BIC-MNI/Display/releases/download/display_2.0.5/mni-display_2.0-5.deb'
+display_remote_resource_dir : 'sys/sw/ubuntu/12.04/display/2.0.5'
+display_remote_resource_path : 'sys/sw/ubuntu/12.04/display/2.0.5/mni-display_2.0-5.deb'
+
+# minc
+
+minc_github_stable_package_url : 'http://packages.bic.mni.mcgill.ca/minc-toolkit/Debian/minc-toolkit-1.0.08-20160205-Ubuntu_12.04-x86_64.deb'
+minc_local_resource_directory  : 'sys/sw/ubuntu/12.04/minc-toolkit/1.0.08'
+minc_local_resource_path       : '{{ minc_local_resource_directory }}/minc-toolkit-1.0.08-20160205-Ubuntu_12.04-x86_64.deb'
+
+research_workstation_ensure_dirs_on_remote:
+
+  research_workstation_display_remote_resource_dir:
+
+    state          : 'directory'
+    path           : '{{ display_remote_resource_dir }}'
+    owner          : 'ansible'
+    group          : 'ansible'
+    mode           : '0755'
+
+  research_workstation_minc_remote_resource_dir:
+
+    state          : 'directory'
+    path           : 'sys/sw/ubuntu/12.04/minc-toolkit/1.0.08'
+    owner          : 'ansible'
+    group          : 'ansible'
+    mode           : '0755'
+
+
+research_workstation_ensure_dirs_on_local:
+
+  research_workstation_display_local_resource_dir:
+
+    state          : 'directory'
+    path           : 'ace_resources/sys/sw/ubuntu/12.04/display/2.0.5'
+    owner          : 'ansible'
+    group          : 'ansible'
+    mode           : '0755'
+
+  research_workstation_minc_local_resource_dir:
+
+    state          : 'directory'
+    path           : 'ace_resources/sys/sw/ubuntu/12.04/minc-toolkit/1.0.08'
+    owner          : 'ansible'
+    group          : 'ansible'
+    mode           : '0755'
 

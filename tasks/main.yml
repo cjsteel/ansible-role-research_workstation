@@ -1,30 +1,32 @@
 ---
 # tasks file for ansible-role-research_workstation
 
-# Add specified repository into sources list using specified filename.
+# FSL installation
 
-- name: "add deb http://neuro.debian.net/debian data main contrib non-free repository"
+## Add sources
+
+- name: "FSL - add deb http://neuro.debian.net/debian data main contrib non-free repository"
   apt_repository:
     repo         : 'deb http://neuro.debian.net/debian data main contrib non-free'
     state        : '{{ fsl_state }}'
     update_cache : yes
     filename     : 'neurodebian.sources.list'
 
-#- name: "add '#deb-src http://neuro.debian.net/debian data main contrib non-free' repository"
+#- name: "FSL - add '#deb-src http://neuro.debian.net/debian data main contrib non-free' repository"
 #  apt_repository:
 #    repo        : '#deb-src http://neuro.debian.net/debian data main contrib non-free'
 #    state       : '{{ fsl_state }}'
 #    update_cache: no
 #    filename    : 'neurodebian.sources.list'
 
-- name: "add 'deb http://neuro.debian.net/debian precise main contrib non-free' repository"
+- name: "FSL - add 'deb http://neuro.debian.net/debian precise main contrib non-free' repository"
   apt_repository:
     repo         : 'deb http://neuro.debian.net/debian precise main contrib non-free'
     state        : '{{ fsl_state }}'
     update_cache : yes
     filename     : 'neurodebian.sources.list'
 
-#- name: "add '#deb-src http://neuro.debian.net/debian precise main contrib non-free' repository"
+#- name: "FSL - add '#deb-src http://neuro.debian.net/debian precise main contrib non-free' repository"
 #  apt_repository:
 #    repo         : '#deb-src http://neuro.debian.net/debian precise main contrib non-free'
 #    state        : '{{ fsl_state }}'
@@ -33,7 +35,7 @@
 
 ## add repo key
 
-- name: "Ensure we add the neuro.debian repositories key(s)"
+- name: "FSL - ensure we add the neuro.debian repositories key(s)"
   apt_key: >
     id=0xA5D32F012649A5A9
     keyserver="hkp://pgp.mit.edu:80"
@@ -51,7 +53,7 @@
 
 ### Ensure fsl-complete is installed
 
-- name: "Install fsl"
+- name: "FSL - update cache and Install fsl-complete"
   apt: >
     update_cache=yes
     name={{ item }}
@@ -60,3 +62,37 @@
     - curl
     - fsl-complete
   tags: [ 'packages', 'fsl-complete' ]
+
+# Display
+
+## Download resources
+
+- name: "Download version 2.0.5 of Display from Github"
+  get_url:
+    url: '{{ display_github_url }}'
+    dest: 'sys/sw/ubuntu/12.04/display/2.0.5/mni-display_2.0-5.deb'
+  tags: [ 'packages', 'display' ]
+
+
+- name: "Install the lastest version of Display for  Ubuntu 12.04"
+  apt:
+    deb: 'sys/sw/ubuntu/12.04/display/2.0.5/mni-display_2.0-5.deb'
+    state: present
+  tags: [ 'packages', 'display' ]
+
+# minc
+
+## Download resources
+
+- name: "Download latest stable version of minc toolkit for ubuntu 12.04 from Github"
+  get_url:
+    url: '{{ minc_github_stable_package_url }}'
+    dest: '{{ minc_local_resource_path }}'
+  tags: [ 'packages', 'minc' ]
+
+
+- name: "Install the lastest version of minc toolkit for Ubuntu 12.04 available on Github"
+  apt:
+    deb: '{{ minc_local_resource_path }}'
+    state: present
+  tags: [ 'packages', 'minc' ]

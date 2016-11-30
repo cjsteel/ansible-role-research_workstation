@@ -1,3 +1,9 @@
+dependencies:
+  - { role: ensure_dirs, 
+        ensure_dirs_on_remote: "{{ research_workstation_ensure_dirs_on_remote }}",
+        ensure_dirs_on_local : "{{ research_workstation_ensure_dirs_on_local }}"
+    }
+
 galaxy_info:
   author: your name
   description: your description
@@ -31,15 +37,7 @@ galaxy_info:
   # the ones that apply to your role. If you don't see your
   # platform on this list, let us know and we'll get it added!
   #
-  #platforms:
-  #- name: OpenBSD
-  #  versions:
-  #  - all
-  #  - 5.6
-  #  - 5.7
-  #  - 5.8
-  #  - 5.9
-  #  - 6.0
+  platforms:
   #- name: Fedora
   #  versions:
   #  - all
@@ -53,12 +51,6 @@ galaxy_info:
   #  - 23
   #  - 24
   #  - 25
-  #- name: DellOS
-  #  versions:
-  #  - all
-  #  - 10
-  #  - 6
-  #  - 9
   #- name: MacOSX
   #  versions:
   #  - all
@@ -68,70 +60,18 @@ galaxy_info:
   #  - 10.7
   #  - 10.8
   #  - 10.9
-  #- name: Synology
-  #  versions:
-  #  - all
-  #  - any
-  #- name: Junos
-  #  versions:
-  #  - all
-  #  - any
-  #- name: GenericBSD
-  #  versions:
-  #  - all
-  #  - any
-  #- name: Void Linux
-  #  versions:
-  #  - all
-  #  - any
-  #- name: GenericLinux
-  #  versions:
-  #  - all
-  #  - any
-  #- name: NXOS
-  #  versions:
-  #  - all
-  #  - any
   #- name: IOS
   #  versions:
   #  - all
   #  - any
-  #- name: Amazon
-  #  versions:
-  #  - all
-  #  - 2013.03
-  #  - 2013.09
-  #  - 2016.03
-  #- name: ArchLinux
-  #  versions:
-  #  - all
-  #  - any
-  #- name: FreeBSD
-  #  versions:
-  #  - all
-  #  - 10.0
-  #  - 10.1
-  #  - 10.2
-  #  - 10.3
-  #  - 11.0
-  #  - 8.0
-  #  - 8.1
-  #  - 8.2
-  #  - 8.3
-  #  - 8.4
-  #  - 9.0
-  #  - 9.1
-  #  - 9.1
-  #  - 9.2
-  #  - 9.3
-  #- name: Ubuntu
-  #  versions:
+  - name: Ubuntu
+    versions:
   #  - all
   #  - lucid
   #  - maverick
   #  - natty
   #  - oneiric
-  #  - precise
+    - precise
   #  - quantal
   #  - raring
   #  - saucy
@@ -151,60 +91,10 @@ galaxy_info:
   #  - squeeze
   #  - stretch
   #  - wheezy
-  #- name: Alpine
-  #  versions:
-  #  - all
-  #  - any
-  #- name: EL
-  #  versions:
-  #  - all
-  #  - 5
-  #  - 6
-  #  - 7
   #- name: Windows
   #  versions:
   #  - all
   #  - 2012R2
-  #- name: SmartOS
-  #  versions:
-  #  - all
-  #  - any
-  #- name: opensuse
-  #  versions:
-  #  - all
-  #  - 12.1
-  #  - 12.2
-  #  - 12.3
-  #  - 13.1
-  #  - 13.2
-  #- name: SLES
-  #  versions:
-  #  - all
-  #  - 10SP3
-  #  - 10SP4
-  #  - 11
-  #  - 11SP1
-  #  - 11SP2
-  #  - 11SP3
-  #  - 11SP4
-  #  - 12
-  #  - 12SP1
-  #- name: GenericUNIX
-  #  versions:
-  #  - all
-  #  - any
-  #- name: Solaris
-  #  versions:
-  #  - all
-  #  - 10
-  #  - 11.0
-  #  - 11.1
-  #  - 11.2
-  #  - 11.3
-  #- name: eos
-  #  versions:
-  #  - all
-  #  - Any
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is
@@ -215,7 +105,3 @@ galaxy_info:
     # NOTE: A tag is limited to a single word comprised of
     # alphanumeric characters. Maximum 20 tags per role.
 
-dependencies: []
-  # List your role dependencies here, one per line.
-  # Be sure to remove the '[]' above if you add dependencies
-  # to this list.
