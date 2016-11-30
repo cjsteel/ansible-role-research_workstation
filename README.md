@@ -6,8 +6,6 @@ Configures a researchers workstation with tools using a standard configuration.
 Requirements
 ------------
 
-* ansible-role-ensure_dirs
-
 Role Variables
 --------------
 
@@ -42,21 +40,22 @@ research_workstation_deployment_user: 'deploy'
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+* ansible-role-ensure_dirs
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: research_workstation
       roles:
-         - { role: username.rolename, x: 42 }
+         - research_workstation
+#         - { role: username.rolename, x: 42 }
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
