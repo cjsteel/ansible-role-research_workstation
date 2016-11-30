@@ -7,55 +7,56 @@
   apt_repository:
     repo         : 'deb http://neuro.debian.net/debian data main contrib non-free'
     state        : '{{ fsl_state }}'
-    update_cache : no
+    update_cache : yes
     filename     : 'neurodebian.sources.list'
 
-- name: "add '#deb-src http://neuro.debian.net/debian data main contrib non-free' repository"
-  apt_repository:
-    repo        : '#deb-src http://neuro.debian.net/debian data main contrib non-free'
-    state       : '{{ fsl_state }}'
-    update_cache: no
-    filename    : 'neurodebian.sources.list'
+#- name: "add '#deb-src http://neuro.debian.net/debian data main contrib non-free' repository"
+#  apt_repository:
+#    repo        : '#deb-src http://neuro.debian.net/debian data main contrib non-free'
+#    state       : '{{ fsl_state }}'
+#    update_cache: no
+#    filename    : 'neurodebian.sources.list'
 
 - name: "add 'deb http://neuro.debian.net/debian precise main contrib non-free' repository"
   apt_repository:
     repo         : 'deb http://neuro.debian.net/debian precise main contrib non-free'
     state        : '{{ fsl_state }}'
-    update_cache : no
+    update_cache : yes
     filename     : 'neurodebian.sources.list'
 
-- name: "add '#deb-src http://neuro.debian.net/debian precise main contrib non-free' repository"
-  apt_repository:
-    repo         : '#deb-src http://neuro.debian.net/debian precise main contrib non-free'
-    state        : '{{ fsl_state }}'
-    update_cache : no
-    filename     : 'neurodebian.sources.list'
+#- name: "add '#deb-src http://neuro.debian.net/debian precise main contrib non-free' repository"
+#  apt_repository:
+#    repo         : '#deb-src http://neuro.debian.net/debian precise main contrib non-free'
+#    state        : '{{ fsl_state }}'
+#    update_cache : no
+#    filename     : 'neurodebian.sources.list'
 
 ## add repo key
 
 - name: "Ensure we add the neuro.debian repositories key(s)"
-  apt_key:
-    id        : 0xA5D32F012649A5A9
-    keyserver : hkp://pgp.mit.edu:80
-    state     : '{{ fsl_state }}'
+  apt_key: >
+    id=0xA5D32F012649A5A9
+    keyserver="hkp://pgp.mit.edu:80"
+    state='{{ fsl_state }}'
 
 ## install fsl
 
 ### update apt cache
 
-- name: update apt cache
-  apt:
-    update_cache    : yes
-    cache_valid_time: 43200
-  tags: [ 'packages' ]
+#- name: "update apt cache"
+#  apt: >
+#    update_cache=yes
+#    cache_valid_time=43200
+#  tags: [ 'packages' ]
 
 ### Ensure fsl-complete is installed
 
-- name: Seems silly but... ensure that the ubuntu-desktop is installed
-  apt:
-    name  : '{{ item }}'
-    state : '{{ fsl_state }}'
+- name: "Install fsl"
+  apt: >
+    update_cache=yes
+    name={{ item }}
+    state={{ fsl_state }}
   with_items:
+    - curl
     - fsl-complete
   tags: [ 'packages', 'fsl-complete' ]
-

@@ -15,9 +15,8 @@ fsl_state             : 'present'   # absent
 ### Debian specific
 #
 #
-#fsl_repositories      : [
-                          - 'deb http://neuro.debian.net/debian data main contrib non-free'
-                          - '#deb-src http://neuro.debian.net/debian data main contrib non-free'
-                        ]
+#fsl_repositories :
+#   - 'deb http://neuro.debian.net/debian data main contrib non-free'
+#   - '#deb-src http://neuro.debian.net/debian data main contrib non-free'
 
 
