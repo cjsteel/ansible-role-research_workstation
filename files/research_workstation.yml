@@ -1,0 +1,6 @@
+---
+- hosts: research_workstation
+  become: true
+  gather_facts: true
+  roles:
+    - research_workstation

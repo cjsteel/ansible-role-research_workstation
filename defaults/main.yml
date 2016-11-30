@@ -1,0 +1,23 @@
+---
+# defaults file for ansible-role-research_workstation
+
+## required
+#
+# 
+
+fsl_state             : 'present'   # absent
+
+## Future
+#
+#fsl_type              : 'full'      # full, free
+#fsl_repository_source : us-nh       # us-nh, us-tn, ??
+
+### Debian specific
+#
+#
+#fsl_repositories      : [
+                          - 'deb http://neuro.debian.net/debian data main contrib non-free'
+                          - '#deb-src http://neuro.debian.net/debian data main contrib non-free'
+                        ]
+
+
