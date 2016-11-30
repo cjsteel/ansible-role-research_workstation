@@ -1,41 +1,42 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Configures a researchers workstation with tools using a standard configuration.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* ansible-role-ensure_dirs
 
 Role Variables
 --------------
+
+### project/group_vars
+
+You probably want to overide the roles/research_workstation/defaults/main.yml value for `research_workstation_deployment_user` in `project/group_vars` as follows:
+
+```shell
+mkdir -p group_vars/research_workstation
+cp roles/research_workstation/files/group_vars/research_workstation/research_workstation_defaults.yml group_vars/research_workstation/.
+nano group_vars/research_workstation/research_workstation_defaults.yml
+```
+
+#### Content example
+
+```yaml
+
+# group_vars/research_workstation/research_workstation_defaults.yml
+#
+
+research_workstation_deployment_user: 'deploy'
+
+```
 
 ### defaults/main.yml
 
 ```yaml
 
----
-# defaults file for ansible-role-research_workstation
-
-## required
-#
-# 
-
-fsl_state             : 'present'   # absent
-
-## Future
-#
-#fsl_type              : 'full'      # full, free
-#fsl_repository_source : us-nh       # us-nh, us-tn, ??
-
-### Debian specific
-#
-#
-#fsl_repositories      : [
-                          - 'deb http://neuro.debian.net/debian data main contrib non-free'
-                          - '#deb-src http://neuro.debian.net/debian data main contrib non-free'
-                        ]
+!()[defaults/main.yml]
 
 ```
 Dependencies

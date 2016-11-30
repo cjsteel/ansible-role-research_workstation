@@ -1,6 +1,8 @@
 ---
 # defaults file for ansible-role-research_workstation
 
+research_workstation_deployment_user: '<deployment_user>'
+
 # FSL
 
 ## required
@@ -39,16 +41,16 @@ research_workstation_ensure_dirs_on_remote:
 
     state          : 'directory'
     path           : '{{ display_remote_resource_dir }}'
-    owner          : 'ansible'
-    group          : 'ansible'
+    owner          : '{{ research_workstation_deployment_user }}'
+    group          : '{{ research_workstation_deployment_user }}'
     mode           : '0755'
 
   research_workstation_minc_remote_resource_dir:
 
     state          : 'directory'
     path           : 'sys/sw/ubuntu/12.04/minc-toolkit/1.0.08'
-    owner          : 'ansible'
-    group          : 'ansible'
+    owner          : '{{ research_workstation_deployment_user }}'
+    group          : '{{ research_workstation_deployment_user }}'
     mode           : '0755'
 
 
@@ -58,15 +60,15 @@ research_workstation_ensure_dirs_on_local:
 
     state          : 'directory'
     path           : 'ace_resources/sys/sw/ubuntu/12.04/display/2.0.5'
-    owner          : 'ansible'
-    group          : 'ansible'
+    owner          : '{{ research_workstation_deployment_user }}'
+    group          : '{{ research_workstation_deployment_user }}'
     mode           : '0755'
 
   research_workstation_minc_local_resource_dir:
 
     state          : 'directory'
     path           : 'ace_resources/sys/sw/ubuntu/12.04/minc-toolkit/1.0.08'
-    owner          : 'ansible'
-    group          : 'ansible'
+    owner          : '{{ research_workstation_deployment_user }}'
+    group          : '{{ research_workstation_deployment_user }}'
     mode           : '0755'
 

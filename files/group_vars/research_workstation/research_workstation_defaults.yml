@@ -1,0 +1,4 @@
+# group_vars/research_workstation/research_workstation_defaults.yml
+
+research_workstation_deployment_user: 'deploy'
+
