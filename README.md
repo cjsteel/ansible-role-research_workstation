@@ -46,7 +46,7 @@ research_workstation_deployment_user: 'deploy'
 
 ```yaml
 
-[defaults/main.yml](defaults/main.yml)
+[defaults/main.yml](http://github.com/cjsteel/ansible-role-research_workstation/blob/master/defaults/main.yml)
 
 ```
 Dependencies
