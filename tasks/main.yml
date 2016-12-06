@@ -3,82 +3,47 @@
 
 # FSL installation
 
-## Add sources
+# include: tasks/fsl.yml
 
-- name: "FSL - add deb http://neuro.debian.net/debian data main contrib non-free repository"
-  apt_repository:
-    repo         : 'deb http://neuro.debian.net/debian data main contrib non-free'
-    state        : '{{ fsl_state }}'
-    update_cache : yes
-    filename     : 'neurodebian.sources.list'
+## update apt cache
 
-#- name: "FSL - add '#deb-src http://neuro.debian.net/debian data main contrib non-free' repository"
-#  apt_repository:
-#    repo        : '#deb-src http://neuro.debian.net/debian data main contrib non-free'
-#    state       : '{{ fsl_state }}'
-#    update_cache: no
-#    filename    : 'neurodebian.sources.list'
+- name: "update apt cache"
+  apt: >
+    update_cache=yes
+    cache_valid_time=43200
+  tags: [ 'packages' ]
 
-- name: "FSL - add 'deb http://neuro.debian.net/debian precise main contrib non-free' repository"
-  apt_repository:
-    repo         : 'deb http://neuro.debian.net/debian precise main contrib non-free'
-    state        : '{{ fsl_state }}'
-    update_cache : yes
-    filename     : 'neurodebian.sources.list'
+## install utilities
 
-#- name: "FSL - add '#deb-src http://neuro.debian.net/debian precise main contrib non-free' repository"
-#  apt_repository:
-#    repo         : '#deb-src http://neuro.debian.net/debian precise main contrib non-free'
-#    state        : '{{ fsl_state }}'
-#    update_cache : no
-#    filename     : 'neurodebian.sources.list'
-
-## add repo key
-
-- name: "FSL - ensure we add the neuro.debian repositories key(s)"
-  apt_key: >
-    id=0xA5D32F012649A5A9
-    keyserver="hkp://pgp.mit.edu:80"
-    state='{{ fsl_state }}'
-
-## install fsl
-
-### update apt cache
-
-#- name: "update apt cache"
-#  apt: >
-#    update_cache=yes
-#    cache_valid_time=43200
-#  tags: [ 'packages' ]
-
-### Ensure fsl-complete is installed
-
-- name: "FSL - update cache and Install fsl-complete"
+- name: "Utilities - ensure for `curl`"
   apt: >
     update_cache=yes
     name={{ item }}
     state={{ fsl_state }}
   with_items:
     - curl
-    - fsl-complete
-  tags: [ 'packages', 'fsl-complete' ]
+  tags: [ 'packages', 'utilities' ]
 
 # Display
 
 ## Download resources
 
-- name: "Download version 2.0.5 of Display from Github"
+- name: "Download version {{ display_version }} of Display from Github"
   get_url:
     url: '{{ display_github_url }}'
-    dest: 'sys/sw/ubuntu/12.04/display/2.0.5/mni-display_2.0-5.deb'
+    dest: 'sys/sw/ubuntu/12.04/display/{{ display_version }}/mni-display_2.0-5.deb'
   tags: [ 'packages', 'display' ]
-
 
 - name: "Install the lastest version of Display for  Ubuntu 12.04"
   apt:
-    deb: 'sys/sw/ubuntu/12.04/display/2.0.5/mni-display_2.0-5.deb'
+    deb: 'sys/sw/ubuntu/12.04/display/{{ display_version }}/mni-display_2.0-5.deb'
     state: present
   tags: [ 'packages', 'display' ]
+
+- command: cp -r /opt/mni-display /opt/mni-display-{{ display_version }}
+  args:
+    chdir: /
+    creates: /opt/mni-display-{{ display_version }}/bin/Display
 
 # minc
 
@@ -96,3 +61,11 @@
     deb: '{{ minc_local_resource_path }}'
     state: present
   tags: [ 'packages', 'minc' ]
+
+- command: cp -r /opt/minc /opt/minc-{{ minc_version }}
+  args:
+    chdir: /
+    creates: /opt/minc-{{ minc_version }}/bin/mincinfo
+
+
+

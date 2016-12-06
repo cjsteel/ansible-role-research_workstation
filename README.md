@@ -50,7 +50,7 @@ research_workstation_deployment_user: 'deploy'
 Dependencies
 ------------
 
-* [ansible-role-ensure_dirs](https://github.com/csteel/ansible-role-ensure_dirs)
+* [ansible-role-ensure_dirs](http://github.com/csteel/ansible-role-ensure_dirs)
 
 Example Playbook
 ----------------
