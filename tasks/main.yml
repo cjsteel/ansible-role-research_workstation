@@ -66,6 +66,3 @@
   args:
     chdir: /
     creates: /opt/minc-{{ minc_version }}/bin/mincinfo
-
-
-
