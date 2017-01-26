@@ -1,4 +1,6 @@
 ---
+# project/research_workstation.yml
+
 - hosts: research_workstation
   become: true
   gather_facts: true
