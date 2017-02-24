@@ -9,17 +9,6 @@
     cache_valid_time=43200
   tags: [ 'packages' ]
 
-## install utilities
-
-- name: "Utilities - ensure for `curl`"
-  apt: >
-    update_cache=yes
-    name={{ item }}
-    state={{ fsl_state }}
-  with_items:
-    - curl
-  tags: [ 'packages', 'utilities' ]
-
 # Display
 
 ## Download resources
